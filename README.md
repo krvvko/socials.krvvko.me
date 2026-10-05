@@ -26,7 +26,7 @@ npm run build
 npm test
 ```
 
-The QR always points to `https://socials.krvvko.me`. The contact button opens `public/kostya-krauchanka.vcf`; iOS shows a contact preview and lets the user save it. Browsers cannot silently insert a contact. Discord opens the user profile and phone opens the dialer.
+The QR always points to `https://socials.krvvko.me`. The contact button generates a `.vcf` file with a meetup note dated using the visitor's local device date at the time of clicking. Open the file to save it in Contacts; browsers cannot silently insert a contact. Address and title are omitted. The public static `.vcf` remains a fallback without a dated note. Discord opens the user profile and phone opens the dialer.
 
 Tests use installed Chrome and the Docker server on port 8080. Set `TEST_BROWSER_CHANNEL` to `msedge` to use Edge, or `TEST_BASE_URL` to test another server.
 

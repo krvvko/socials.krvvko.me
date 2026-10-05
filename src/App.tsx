@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { ArrowUpRight, MapPin, Phone, QrCode, UserRoundPlus, X } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
+import { downloadContact } from './contact';
 
 const siteUrl = 'https://socials.krvvko.me';
 const socials = [
@@ -41,7 +42,7 @@ export default function App() {
           <h1 id="name">Kostya{' '}<span>Krauchanka<span className="name-period">.</span></span></h1>
           <p className="bio">Software engineer <span className="bio-divider">/</span> 6 years of experience</p>
           <div className="actions">
-            <a className="button button-primary" href="/kostya-krauchanka.vcf"><UserRoundPlus size={17} />Add to contacts</a>
+            <a className="button button-primary" href="/kostya-krauchanka.vcf" onClick={event => { event.preventDefault(); downloadContact(); }}><UserRoundPlus size={17} />Add to contacts</a>
             <a className="button button-secondary" href="https://krvvko.me" target="_blank" rel="noopener noreferrer">My portfolio<ArrowUpRight size={16} /></a>
           </div>
         </section>
@@ -67,7 +68,7 @@ export default function App() {
       <dialog ref={dialog} className="qr-dialog" aria-labelledby="qr-title" onClick={event => { if (event.target === dialog.current) closeQr(); }} onClose={() => qrTrigger.current?.focus()}>
         <button className="dialog-close" onClick={closeQr} aria-label="Close QR code"><X size={19} /></button>
         <h2 id="qr-title">Let’s stay in touch.</h2>
-        <div className="qr-frame"><QRCodeSVG className="qr-image" value={siteUrl} size={224} level="M" marginSize={4} bgColor="#ffffff" fgColor="#242723" title="QR code for Kostya’s contact page" /></div>
+        <div className="qr-frame"><QRCodeSVG className="qr-image" value={siteUrl} size={224} level="M" marginSize={4} bgColor="#f2f1ed" fgColor="#242723" title="QR code for Kostya’s contact page" /></div>
       </dialog>
     </div>
   );

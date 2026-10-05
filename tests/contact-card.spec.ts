@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
 
 for (const [width, height] of [[1440, 900], [1280, 720], [390, 844], [375, 667], [320, 568], [844, 390]]) {
   test(`all content fits ${width}×${height}`, async ({ page }) => {
@@ -46,8 +47,26 @@ test('contact file has the right MIME type and details', async ({ request }) => 
   expect(response.ok()).toBe(true);
   expect(response.headers()['content-type']).toContain('text/vcard');
   const card = await response.text();
-  for (const value of ['VERSION:3.0', 'FN:Kostya Krauchanka', 'TEL;TYPE=CELL:+19787273287', 'Westford;MA', 'Discord: krvvko', 'https://krvvko.me', 'https://quolly.app/', 'https://techscreen.app/', 'https://mrris.land/']) expect(card).toContain(value);
+  for (const value of ['VERSION:3.0', 'FN:Kostya Krauchanka', 'TEL;TYPE=CELL:+19787273287', 'https://krvvko.me', 'https://discord.com/users/552151232358252563']) expect(card).toContain(value);
+  expect(card).not.toMatch(/^(ADR|TITLE)[;:]/m);
 });
+
+for (const [timezoneId, expectedDate] of [['America/New_York', 'October 4\\, 2026'], ['Asia/Tokyo', 'October 5\\, 2026']]) {
+  test(`vCard uses the visitor's date in ${timezoneId}`, async ({ browser }) => {
+    const context = await browser.newContext({ timezoneId });
+    const page = await context.newPage();
+    await page.clock.install({ time: new Date('2026-10-05T02:00:00Z') });
+    await page.goto(process.env.TEST_BASE_URL || 'http://127.0.0.1:8080');
+    const downloadEvent = page.waitForEvent('download');
+    await page.getByRole('link', { name: 'Add to contacts' }).click();
+    const download = await downloadEvent;
+    expect(download.suggestedFilename()).toBe('kostya-krauchanka.vcf');
+    const card = await readFile((await download.path())!, 'utf8');
+    expect(card).toContain(`NOTE:We met at a meetup on ${expectedDate}.`);
+    expect(card).not.toMatch(/^(ADR|TITLE)[;:]/m);
+    await context.close();
+  });
+}
 
 test('social destinations include the Discord profile', async ({ page }) => {
   await page.goto('/');
