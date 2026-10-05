@@ -45,14 +45,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid #777777; outline-offs
 .qr-trigger:hover { color: #666666; }
 
 .profile {
-  width: 960px;
+  width: 900px;
   max-width: 100%;
   margin: auto;
   padding: 36px 0;
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  column-gap: 100px;
-  row-gap: 58px;
+  column-gap: 68px;
+  row-gap: 28px;
 }
 .profile-top { display: flex; align-items: center; gap: 20px; }
 .portrait {
@@ -105,13 +105,13 @@ h1 > span { display: block; }
 }
 .social:first-child { border-top: 1px solid #dddddd; }
 .social-icon { display: grid; place-items: center; width: 33px; height: 33px; background: #e9e9e9; border: 1px solid #dedede; border-radius: 9px; }
-.brand-icon { display: block; width: 19px; height: 19px; mask-size: contain; mask-position: center; mask-repeat: no-repeat; -webkit-mask-size: contain; -webkit-mask-position: center; -webkit-mask-repeat: no-repeat; }
+.brand-icon { display: block; width: 19px; height: 19px; background: #292929; mask-size: contain; mask-position: center; mask-repeat: no-repeat; -webkit-mask-size: contain; -webkit-mask-position: center; -webkit-mask-repeat: no-repeat; }
 .social-arrow { margin-left: auto; color: #aaaaaa; transition: transform .18s; }
 .social:hover { color: #555555; }
 .social:hover .social-arrow { color: #555555; transform: translate(2px, -2px); }
 .phone-label { display: none; }
 
-.ventures { grid-column: 1 / -1; display: flex; align-items: center; gap: 40px; padding-top: 25px; }
+.ventures { grid-column: 1 / -1; display: flex; align-items: center; gap: 30px; padding-top: 12px; }
 .projects { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); flex: 1; align-items: center; gap: 28px; }
 .project { display: flex; align-items: center; gap: 9px; font-size: 13px; white-space: nowrap; padding: 6px 0; }
 .project img { width: 23px; height: 23px; object-fit: contain; border-radius: 5px; }
@@ -151,7 +151,7 @@ h1 > span { display: block; }
   .page-header { height: 32px; }
   .wordmark { font-size: 21px; }
   .qr-trigger { font-size: 11px; }
-  .profile { width: 420px; display: flex; flex-direction: column; gap: 34px; padding: 25px 0; }
+  .profile { width: 420px; display: flex; flex-direction: column; gap: 24px; padding: 20px 0; }
   .portrait { width: 92px; height: 92px; }
   .profile-top { gap: 16px; }
   .availability { font-size: 11px; }
@@ -162,15 +162,15 @@ h1 > span { display: block; }
   .button { min-height: 43px; font-size: 11px; }
   .connect { align-self: stretch; }
   .section-label { font-size: 8px; letter-spacing: 1.5px; }
-  .socials { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); margin: 15px -8px 0; }
-  .social { height: auto; min-height: 54px; flex-direction: column; gap: 9px; border: 0; font-size: 9px; padding: 6px 0; }
+  .socials { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 9px; margin: 14px 0 0; }
+  .social { height: auto; min-height: 38px; flex-direction: row; gap: 6px; border: 0; font-size: 10px; padding: 0; }
   .social:first-child { border: 0; }
-  .social-icon { width: 39px; height: 39px; border-radius: 11px; }
-  .brand-icon { width: 21px; height: 21px; }
+  .social-icon { width: 31px; height: 31px; border-radius: 9px; flex-shrink: 0; }
+  .brand-icon { width: 18px; height: 18px; }
   .social-arrow { display: none; }
   .phone-number { display: none; }
   .phone-label { display: inline; }
-  .ventures { display: block; padding-top: 21px; }
+  .ventures { display: block; padding-top: 8px; }
   .projects { gap: 7px; margin-top: 15px; }
   .project { font-size: 10px; gap: 5px; }
   .project img { width: 17px; height: 17px; }
@@ -179,7 +179,7 @@ h1 > span { display: block; }
 }
 
 @media (max-height: 720px) {
-  .profile { row-gap: 35px; padding: 18px 0; }
+  .profile { row-gap: 24px; padding: 18px 0; }
   .portrait { width: 92px; height: 92px; }
   h1 { margin-top: 20px; margin-bottom: 14px; }
   .actions { margin-top: 20px; }
@@ -187,12 +187,18 @@ h1 > span { display: block; }
 
 @media (max-height: 720px) and (max-width: 650px) {
   .page { padding-top: 17px; padding-bottom: 12px; }
-  .profile { gap: 23px; padding: 15px 0; }
+  .profile { gap: 18px; padding: 12px 0; }
   .portrait { width: 80px; height: 80px; }
-  h1 { margin: 16px 0 12px; }
+  h1 { font-size: 37px; margin: 16px 0 12px; }
   .profile-meta { margin-top: 12px; gap: 17px; }
   .availability, .location { font-size: 10px; }
-  .ventures { padding-top: 16px; }
+  .socials { row-gap: 8px; }
+  .social { padding: 0; }
+  .social-icon { width: 31px; height: 31px; }
+  .button { min-height: 40px; }
+  .ventures { padding-top: 8px; }
+  .project { padding: 4px 0; }
+  .page-footer { height: 20px; padding-top: 6px; }
 }
 
 @media (max-height: 640px) and (max-width: 650px) {
@@ -206,9 +212,9 @@ h1 > span { display: block; }
   .actions { margin-top: 12px; }
   .button { min-height: 36px; font-size: 10px; padding: 0 12px; }
   .button-secondary { padding: 0; }
-  .socials { margin-top: 8px; }
-  .social { min-height: 48px; gap: 7px; }
-  .social-icon { width: 33px; height: 33px; border-radius: 9px; }
+  .socials { margin-top: 8px; row-gap: 8px; }
+  .social { min-height: 34px; gap: 5px; font-size: 9px; }
+  .social-icon { width: 28px; height: 28px; border-radius: 8px; }
   .ventures { padding-top: 12px; }
   .projects { margin-top: 10px; }
   .project { font-size: 9px; }

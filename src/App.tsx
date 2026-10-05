@@ -5,11 +5,11 @@ import { downloadContact } from './contact';
 
 const siteUrl = 'https://socials.krvvko.me';
 const socials = [
-  { name: 'LinkedIn', icon: 'linkedin', color: '#0a66c2', href: 'https://www.linkedin.com/in/kostya-krauchanka-458288441/' },
-  { name: 'Instagram', icon: 'instagram', color: '#c13584', href: 'https://www.instagram.com/krvvko/' },
-  { name: 'GitHub', icon: 'github', color: '#292929', href: 'https://github.com/krvvko' },
-  { name: 'X', icon: 'twitter-x', color: '#292929', href: 'https://x.com/KKrevvetka' },
-  { name: 'Discord', icon: 'discord', color: '#5865f2', href: 'https://discord.com/users/552151232358252563' },
+  { name: 'LinkedIn', icon: 'linkedin', href: 'https://www.linkedin.com/in/kostya-krauchanka-458288441/' },
+  { name: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/krvvko/' },
+  { name: 'GitHub', icon: 'github', href: 'https://github.com/krvvko' },
+  { name: 'X', icon: 'twitter-x', href: 'https://x.com/KKrevvetka' },
+  { name: 'Discord', icon: 'discord', href: 'https://discord.com/users/552151232358252563' },
 ];
 const projects = [
   { name: 'quolly.app', href: 'https://quolly.app/', icon: '/projects/quolly.ico' },
@@ -50,7 +50,7 @@ export default function App() {
         <section className="connect" aria-labelledby="connect-title">
           <div className="section-label" id="connect-title">FIND ME ONLINE</div>
           <div className="socials">
-            {socials.map(social => <a key={social.name} className="social" href={social.href} target="_blank" rel="noopener noreferrer"><span className="social-icon"><span className="brand-icon" aria-hidden="true" style={{ maskImage: `url(/icons/${social.icon}.svg)`, WebkitMaskImage: `url(/icons/${social.icon}.svg)`, backgroundColor: social.color }} /></span><span>{social.name}</span><ArrowUpRight className="social-arrow" size={16} /></a>)}
+            {socials.map(social => <a key={social.name} className="social" href={social.href} target="_blank" rel="noopener noreferrer"><span className="social-icon"><span className="brand-icon" aria-hidden="true" style={{ maskImage: `url(/icons/${social.icon}.svg)`, WebkitMaskImage: `url(/icons/${social.icon}.svg)` }} /></span><span>{social.name}</span><ArrowUpRight className="social-arrow" size={16} /></a>)}
             <a className="social phone-social" href="tel:+19787273287" aria-label="Call +1 (978) 727-3287"><span className="social-icon"><Phone size={18} strokeWidth={1.7} /></span><span className="phone-number">+1 (978) 727-3287</span><span className="phone-label">Phone</span><ArrowUpRight className="social-arrow" size={16} /></a>
           </div>
         </section>
