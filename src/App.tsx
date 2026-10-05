@@ -5,11 +5,11 @@ import { downloadContact } from './contact';
 
 const siteUrl = 'https://socials.krvvko.me';
 const socials = [
-  { name: 'LinkedIn', icon: 'linkedin', href: 'https://www.linkedin.com/in/kostya-krauchanka-458288441/' },
-  { name: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/krvvko/' },
-  { name: 'GitHub', icon: 'github', href: 'https://github.com/krvvko' },
-  { name: 'X', icon: 'twitter-x', href: 'https://x.com/KKrevvetka' },
-  { name: 'Discord', icon: 'discord', href: 'https://discord.com/users/552151232358252563' },
+  { name: 'LinkedIn', icon: 'linkedin', color: '#0a66c2', href: 'https://www.linkedin.com/in/kostya-krauchanka-458288441/' },
+  { name: 'Instagram', icon: 'instagram', color: '#c13584', href: 'https://www.instagram.com/krvvko/' },
+  { name: 'GitHub', icon: 'github', color: '#292929', href: 'https://github.com/krvvko' },
+  { name: 'X', icon: 'twitter-x', color: '#292929', href: 'https://x.com/KKrevvetka' },
+  { name: 'Discord', icon: 'discord', color: '#5865f2', href: 'https://discord.com/users/552151232358252563' },
 ];
 const projects = [
   { name: 'quolly.app', href: 'https://quolly.app/', icon: '/projects/quolly.ico' },
@@ -36,11 +36,11 @@ export default function App() {
       <main className="profile" aria-labelledby="name">
         <section className="intro">
           <div className="profile-top">
-            <img className="portrait" src="/profile.png" alt="Kostya on a snowy mountain" width="80" height="80" />
-            <div className="profile-meta"><div className="availability"><span />Available for work</div><div className="location"><MapPin size={13} strokeWidth={1.7} />Westford, MA</div></div>
+            <img className="portrait" src="/profile.png" alt="Kostya on a snowy mountain" width="104" height="104" />
           </div>
           <h1 id="name">Kostya{' '}<span>Krauchanka<span className="name-period">.</span></span></h1>
           <p className="bio">Software engineer <span className="bio-divider">/</span> 6 years of experience</p>
+          <div className="profile-meta"><div className="location"><MapPin size={13} strokeWidth={1.7} />Westford, MA</div><div className="availability"><span />Available for work</div></div>
           <div className="actions">
             <a className="button button-primary" href="/kostya-krauchanka.vcf" onClick={event => { event.preventDefault(); downloadContact(); }}><UserRoundPlus size={17} />Add to contacts</a>
             <a className="button button-secondary" href="https://krvvko.me" target="_blank" rel="noopener noreferrer">My portfolio<ArrowUpRight size={16} /></a>
@@ -50,10 +50,8 @@ export default function App() {
         <section className="connect" aria-labelledby="connect-title">
           <div className="section-label" id="connect-title">FIND ME ONLINE</div>
           <div className="socials">
-            {socials.map(social => <a key={social.name} className="social" href={social.href} target="_blank" rel="noopener noreferrer"><span className="social-icon"><img src={`/icons/${social.icon}.svg`} width="22" height="22" alt="" /></span><span>{social.name}</span><ArrowUpRight className="social-arrow" size={16} /></a>)}
-          </div>
-          <div className="contact-row">
-            <a className="contact-link" href="tel:+19787273287"><Phone size={14} /><span>+1 (978) 727-3287</span></a>
+            {socials.map(social => <a key={social.name} className="social" href={social.href} target="_blank" rel="noopener noreferrer"><span className="social-icon"><span className="brand-icon" aria-hidden="true" style={{ maskImage: `url(/icons/${social.icon}.svg)`, WebkitMaskImage: `url(/icons/${social.icon}.svg)`, backgroundColor: social.color }} /></span><span>{social.name}</span><ArrowUpRight className="social-arrow" size={16} /></a>)}
+            <a className="social phone-social" href="tel:+19787273287" aria-label="Call +1 (978) 727-3287"><span className="social-icon"><Phone size={18} strokeWidth={1.7} /></span><span className="phone-number">+1 (978) 727-3287</span><span className="phone-label">Phone</span><ArrowUpRight className="social-arrow" size={16} /></a>
           </div>
         </section>
 
@@ -68,7 +66,7 @@ export default function App() {
       <dialog ref={dialog} className="qr-dialog" aria-labelledby="qr-title" onClick={event => { if (event.target === dialog.current) closeQr(); }} onClose={() => qrTrigger.current?.focus()}>
         <button className="dialog-close" onClick={closeQr} aria-label="Close QR code"><X size={19} /></button>
         <h2 id="qr-title">Let’s stay in touch.</h2>
-        <div className="qr-frame"><QRCodeSVG className="qr-image" value={siteUrl} size={224} level="M" marginSize={4} bgColor="#f2f1ed" fgColor="#242723" title="QR code for Kostya’s contact page" /></div>
+        <div className="qr-frame"><QRCodeSVG className="qr-image" value={siteUrl} size={224} level="M" marginSize={4} bgColor="#f3f3f3" fgColor="#272727" title="QR code for Kostya’s contact page" /></div>
       </dialog>
     </div>
   );

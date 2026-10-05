@@ -75,6 +75,7 @@ test('social destinations include the Discord profile', async ({ page }) => {
   await expect(page.getByRole('link', { name: 'GitHub', exact: true })).toHaveAttribute('href', 'https://github.com/krvvko');
   await expect(page.getByRole('link', { name: 'X', exact: true })).toHaveAttribute('href', 'https://x.com/KKrevvetka');
   await expect(page.getByRole('link', { name: 'Discord', exact: true })).toHaveAttribute('href', 'https://discord.com/users/552151232358252563');
+  await expect(page.getByRole('link', { name: 'Call +1 (978) 727-3287' })).toHaveAttribute('href', 'tel:+19787273287');
 });
 
 test('page uses a plain background with no card container', async ({ page }) => {
