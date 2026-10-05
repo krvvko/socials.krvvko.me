@@ -1,0 +1,15 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Krauchanka;Kostya;;;
+FN:Kostya Krauchanka
+TITLE:Software Engineer & Founder
+TEL;TYPE=CELL:+19787273287
+ADR;TYPE=HOME:;;;Westford;MA;;United States
+URL:https://krvvko.me
+URL:https://socials.krvvko.me
+X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/in/kostya-krauchanka-458288441/
+X-SOCIALPROFILE;TYPE=instagram:https://www.instagram.com/krvvko/
+X-SOCIALPROFILE;TYPE=github:https://github.com/krvvko
+X-SOCIALPROFILE;TYPE=twitter:https://x.com/KKrevvetka
+NOTE:Software engineer with 6 years of experience. Available for work.\nDiscord: krvvko\nFounder: https://quolly.app/\, https://techscreen.app/\, https://mrris.land/
+END:VCARD
