@@ -26,7 +26,7 @@ npm run build
 npm test
 ```
 
-The QR always points to `https://socials.krvvko.me`. The contact button opens `public/kostya-krauchanka.vcf`; iOS shows a contact preview and lets the user save it. Browsers cannot silently insert a contact. Discord copies the username and phone opens the dialer.
+The QR always points to `https://socials.krvvko.me`. The contact button opens `public/kostya-krauchanka.vcf`; iOS shows a contact preview and lets the user save it. Browsers cannot silently insert a contact. Discord opens the user profile and phone opens the dialer.
 
 Tests use installed Chrome and the Docker server on port 8080. Set `TEST_BROWSER_CHANNEL` to `msedge` to use Edge, or `TEST_BASE_URL` to test another server.
 
@@ -36,5 +36,6 @@ Tests use installed Chrome and the Docker server on port 8080. Set `TEST_BROWSER
 - Social logos: downloaded from [Bootstrap Icons](https://icons.getbootstrap.com/), MIT licensed. Sources and license in `public/icons/`.
 - UI icons: [Lucide](https://lucide.dev/), ISC licensed, bundled locally.
 - Typeface: [Manrope](https://fonts.google.com/specimen/Manrope), SIL Open Font License, self-hosted through Fontsource.
+- Project favicons: downloaded from quolly.app, techscreen.app, and mrris.land. This site's favicon is the original from krvvko.me.
 
-The background animation respects reduced-motion preferences. Mobile and desktop layouts fit one screen at normal text sizes; accessibility zoom and very small viewports may need additional space.
+The page has a plain background and an open layout. Mobile and desktop layouts fit one screen at normal text sizes; accessibility zoom and very small viewports may need additional space.

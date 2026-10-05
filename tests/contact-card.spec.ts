@@ -7,7 +7,7 @@ for (const [width, height] of [[1440, 900], [1280, 720], [390, 844], [375, 667],
     page.on('pageerror', error => errors.push(error.message));
     await page.goto('/');
     await page.evaluate(() => document.fonts.ready);
-    await expect(page.getByRole('heading', { name: 'Kostya Krauchanka.' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Kostya.*Krauchanka/ })).toBeVisible();
     const bounds = await page.locator('main').boundingBox();
     expect(bounds!.y).toBeGreaterThanOrEqual(0);
     expect(bounds!.y + bounds!.height).toBeLessThanOrEqual(height);
@@ -19,22 +19,20 @@ for (const [width, height] of [[1440, 900], [1280, 720], [390, 844], [375, 667],
       expect(box!.x + box!.width).toBeLessThanOrEqual(width);
       expect(box!.y + box!.height).toBeLessThanOrEqual(height);
     }
-    expect(await page.locator('img').evaluateAll(images => images.every(img => (img as HTMLImageElement).complete && (img as HTMLImageElement).naturalWidth > 0))).toBe(true);
+    await expect.poll(() => page.locator('img').evaluateAll(images => images.every(img => (img as HTMLImageElement).complete && (img as HTMLImageElement).naturalWidth > 0))).toBe(true);
     expect(errors).toEqual([]);
     if (width === 1440 || width === 375) await page.screenshot({ path: `.verification/${width === 1440 ? 'desktop' : 'mobile'}.png` });
   });
 }
 
-test('QR dialog opens, downloads, and restores focus', async ({ page }) => {
+test('minimal QR dialog opens and restores focus', async ({ page }) => {
   await page.goto('/');
   const trigger = page.getByRole('button', { name: 'Show QR code' });
   await trigger.click();
   await expect(page.getByRole('dialog')).toBeVisible();
   await expect(page.locator('.qr-image')).toBeVisible();
-  await expect(page.getByText('socials.krvvko.me', { exact: true })).toBeVisible();
-  const downloadEvent = page.waitForEvent('download');
-  await page.getByRole('button', { name: 'Save QR code' }).click();
-  expect((await downloadEvent).suggestedFilename()).toBe('kostya-krauchanka-qr.svg');
+  await expect(page.getByRole('heading', { name: 'Let’s stay in touch.' })).toBeVisible();
+  await expect(page.getByRole('dialog').getByRole('button')).toHaveCount(1);
   await page.keyboard.press('Escape');
   await expect(page.getByRole('dialog')).not.toBeVisible();
   await expect(trigger).toBeFocused();
@@ -51,20 +49,17 @@ test('contact file has the right MIME type and details', async ({ request }) => 
   for (const value of ['VERSION:3.0', 'FN:Kostya Krauchanka', 'TEL;TYPE=CELL:+19787273287', 'Westford;MA', 'Discord: krvvko', 'https://krvvko.me', 'https://quolly.app/', 'https://techscreen.app/', 'https://mrris.land/']) expect(card).toContain(value);
 });
 
-test('social destinations and clipboard are correct', async ({ page, context }) => {
-  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+test('social destinations include the Discord profile', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('link', { name: 'LinkedIn', exact: true })).toHaveAttribute('href', 'https://www.linkedin.com/in/kostya-krauchanka-458288441/');
   await expect(page.getByRole('link', { name: 'Instagram', exact: true })).toHaveAttribute('href', 'https://www.instagram.com/krvvko/');
   await expect(page.getByRole('link', { name: 'GitHub', exact: true })).toHaveAttribute('href', 'https://github.com/krvvko');
   await expect(page.getByRole('link', { name: 'X', exact: true })).toHaveAttribute('href', 'https://x.com/KKrevvetka');
-  await page.getByRole('button', { name: 'Copy Discord username krvvko' }).click();
-  await expect(page.getByRole('status')).toHaveText('Discord username copied');
-  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('krvvko');
+  await expect(page.getByRole('link', { name: 'Discord', exact: true })).toHaveAttribute('href', 'https://discord.com/users/552151232358252563');
 });
 
-test('reduced motion disables background movement', async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: 'reduce' });
+test('page uses a plain background with no card container', async ({ page }) => {
   await page.goto('/');
-  expect(await page.locator('.ambient-one').evaluate(element => getComputedStyle(element).animationName)).toBe('none');
+  expect(await page.locator('main').evaluate(element => ({ background:getComputedStyle(element).backgroundImage, shadow:getComputedStyle(element).boxShadow, border:getComputedStyle(element).borderWidth }))).toEqual({background:'none',shadow:'none',border:'0px'});
+  await expect(page.locator('.ambient')).toHaveCount(0);
 });
